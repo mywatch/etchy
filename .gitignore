@@ -1,0 +1,10 @@
+__pycache__
+.idea
+.mypy_cache
+.coverage
+build
+dist
+target
+etchy
+etchy.spec
+*.rpm

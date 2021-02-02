@@ -1,0 +1,13 @@
+[package]
+name = "etchy"
+version = "0.1.0"
+authors = ["mywatch <>"]
+edition = "2018"
+description = "etchy - Edis patch tool"
+
+[dependencies]
+
+[package.metadata.spec]
+name = "etchy"
+prefix = "/opt/edis"
+vendor = ""

@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true 
+name = "pypi"
+
+[requires]
+python_version = "3.6.3"
+
+[packages]
+click = "*"
+msgpack = "*"
+redis = "*"
+
+[dev-packages]
+mypy = "*"
+coverage = "*"
+pytest = "<4.0"
+pytest-cov = "*"
+flake8 = "*"
+yapf = "*"
+isort = "*"
+pyinstaller = "<3.4"

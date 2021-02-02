@@ -1,0 +1,32 @@
+image: centos:7.5
+
+before_script:
+  - eval `ssh-agent -s`
+  - echo "${SSH_PRIVATE_KEY}" | ssh-add -
+  - ssh-add -l
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  - export LC_ALL=en_US.utf8
+  - export LANG=en_US.utf8
+  - export PATH=$PATH:/usr/local/bin
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - yum install -y --nogpgcheck python36-3.6.3-7.el7 cargo-epack
+    - python3.6 -m ensurepip -v --default-pip
+    - curl https://sh.rustup.rs -sSf | /bin/bash -s -- -y --default-toolchain nightly
+    - source ~/.cargo/env
+    - make setup
+    - pipenv install --dev --system
+    - make test package
+    - rpm2cpio *.rpm | cpio -idmv
+  artifacts:
+    paths:
+      - etchy
+      - "*.rpm"
+  tags:
+    - centos7base
